@@ -123,4 +123,4 @@ docker compose up -d
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=lexmin0412/dify-app-hub&type=Date)](https://www.star-history.com/#lexmin0412/dify-app-hub&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=lexmin0412/dify-app-hub&type=Date)](https://star-history.dera.page/#lexmin0412/dify-app-hub&Date)
