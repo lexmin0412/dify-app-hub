@@ -5,12 +5,12 @@ import { generateUuidV4 } from '@/lib/helpers'
 export const users = mysqlTable(
 	'users',
 	{
-		id: varchar({ length: 191 })
+		id: varchar({ length: 36 })
 			.primaryKey()
 			.$defaultFn(() => generateUuidV4()),
-		name: varchar({ length: 191 }),
-		email: varchar({ length: 191 }).notNull(),
-		password: varchar({ length: 191 }).notNull(),
+		name: varchar({ length: 255 }),
+		email: varchar({ length: 255 }).notNull(),
+		password: varchar({ length: 255 }).notNull(),
 		createdAt: datetime('created_at', { fsp: 3 })
 			.default(sql`CURRENT_TIMESTAMP(3)`)
 			.notNull(),
