@@ -97,9 +97,8 @@ packages/docs/              # Rspress 文档站点 (dify-app-hub-docs)
 
 在用户明确要求提交代码之前，**必须**做以下操作：
 
-1. 审视本次代码变更，判断哪些项的状态发生了变化
-2. 更新 `.cii-assessment.md` 对应项的状态（✅/⚠️/❌）
-3. 更新文件底部的「变更记录」表格，记录本次变更内容
-4. **单独提交** `.cii-assessment.md` 的变更，不要与业务代码改动混在同一个 commit 中
+1. 基于 [.cii-assessment.md](./.cii-assessment.md) 中的评估标准，检查每一项的结果是否有任何变化，有则直接更新
+2. 如果上一步评估结果有变化，则需要更新文件底部的「变更记录」表格，记录本次评估结果的变更内容
+3. 基于以上两步，如果 [.cii-assessment.md](./.cii-assessment.md) 文件存在任何变更，**必须单独提交** `.cii-assessment.md` 的变更，不要与业务代码改动混在同一个 commit 中
 
 例如：本次添加了 `CONTRIBUTING.md`，则应更新 #2（改为 ✅ 并填写证据链接）、#13（改为 ✅），并在变更记录中加一行，然后单独 `git commit -m "docs: update CII assessment"` 。
