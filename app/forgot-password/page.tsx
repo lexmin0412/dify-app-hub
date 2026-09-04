@@ -20,11 +20,15 @@ export default function ForgotPasswordPage() {
 	const onFinish = async ({ email }: { email: string }) => {
 		setLoading(true)
 		try {
-			await fetch('/api/auth/forgot-password', {
+			const response = await fetch('/api/auth/forgot-password', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ email }),
 			})
+			if (!response.ok) {
+				message.error('请求失败，请稍后重试')
+				return
+			}
 			setSent(true)
 		} catch {
 			message.error('请求失败，请稍后重试')

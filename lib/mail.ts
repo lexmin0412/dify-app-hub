@@ -27,6 +27,13 @@ export async function sendPasswordResetEmail(email: string, token: string) {
 		host: process.env.SMTP_SERVER,
 		port,
 		secure,
+		requireTLS: process.env.SMTP_USE_TLS === 'true' && port !== 465,
+		tls: {
+			minVersion: 'TLSv1.2',
+		},
+		connectionTimeout: 10_000,
+		greetingTimeout: 10_000,
+		socketTimeout: 30_000,
 		auth: {
 			user: process.env.SMTP_USERNAME,
 			pass: process.env.SMTP_PASSWORD,
