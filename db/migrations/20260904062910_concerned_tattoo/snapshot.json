@@ -1,7 +1,7 @@
 {
 	"version": "6",
 	"dialect": "mysql",
-	"id": "ece384ad-83d3-4b42-9431-9fbd892e5019",
+	"id": "dc937859-3297-45b5-9a10-cd93da405b2a",
 	"prevIds": ["cf6b1f1c-0388-4b7d-8bdd-b5863e082cd0"],
 	"ddl": [
 		{
@@ -255,20 +255,6 @@
 			"table": "password_reset_tokens"
 		},
 		{
-			"type": "varchar(45)",
-			"notNull": true,
-			"autoIncrement": false,
-			"default": null,
-			"onUpdateNow": false,
-			"onUpdateNowFsp": null,
-			"charSet": null,
-			"collation": null,
-			"generated": null,
-			"name": "request_ip",
-			"entityType": "columns",
-			"table": "password_reset_tokens"
-		},
-		{
 			"type": "varchar(64)",
 			"notNull": true,
 			"autoIncrement": false,
@@ -381,6 +367,20 @@
 			"table": "users"
 		},
 		{
+			"type": "int",
+			"notNull": true,
+			"autoIncrement": false,
+			"default": "0",
+			"onUpdateNow": false,
+			"onUpdateNowFsp": null,
+			"charSet": null,
+			"collation": null,
+			"generated": null,
+			"name": "session_version",
+			"entityType": "columns",
+			"table": "users"
+		},
+		{
 			"type": "datetime(3)",
 			"notNull": true,
 			"autoIncrement": false,
@@ -445,7 +445,7 @@
 		{
 			"columns": [
 				{
-					"value": "request_ip",
+					"value": "token_hash",
 					"isExpression": false
 				}
 			],
@@ -454,7 +454,7 @@
 			"algorithm": null,
 			"lock": null,
 			"nameExplicit": true,
-			"name": "password_reset_tokens_request_ip_idx",
+			"name": "password_reset_tokens_token_hash_idx",
 			"entityType": "indexes",
 			"table": "password_reset_tokens"
 		},

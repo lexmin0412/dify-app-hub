@@ -23,7 +23,6 @@ export async function POST(request: NextRequest) {
 		if (typeof email !== 'string' || !email.trim()) return NextResponse.json(genericResponse)
 
 		const normalizedEmail = email.trim().toLowerCase()
-		const requestIp = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown'
 		const db = getDb()
 		const rows = await db
 			.select({ id: users.id, email: users.email })
@@ -38,26 +37,27 @@ export async function POST(request: NextRequest) {
 			.where(
 				and(
 					eq(passwordResetTokens.userId, rows[0].id),
-					eq(passwordResetTokens.requestIp, requestIp),
 					gt(passwordResetTokens.createdAt, new Date(Date.now() - 60 * 1000)),
 				),
 			)
 		if ((recentRequests[0]?.count ?? 0) >= 3) return NextResponse.json(genericResponse)
 
-		await db
-			.update(passwordResetTokens)
-			.set({ usedAt: new Date() })
-			.where(and(eq(passwordResetTokens.userId, rows[0].id), isNull(passwordResetTokens.usedAt)))
 		const resetToken = createPasswordResetToken()
-		await db.insert(passwordResetTokens).values({
-			id: generateUuidV4(),
-			userId: rows[0].id,
-			requestIp,
-			tokenHash: resetToken.tokenHash,
-			expiresAt: resetToken.expiresAt,
-			createdAt: new Date(),
-		})
 		await sendPasswordResetEmail(rows[0].email, resetToken.token)
+		await db.transaction(async tx => {
+			const now = new Date()
+			await tx
+				.update(passwordResetTokens)
+				.set({ usedAt: now })
+				.where(and(eq(passwordResetTokens.userId, rows[0].id), isNull(passwordResetTokens.usedAt)))
+			await tx.insert(passwordResetTokens).values({
+				id: generateUuidV4(),
+				userId: rows[0].id,
+				tokenHash: resetToken.tokenHash,
+				expiresAt: resetToken.expiresAt,
+				createdAt: now,
+			})
+		})
 		return NextResponse.json(genericResponse)
 	} catch (error) {
 		console.error('发送密码重置邮件失败:', error)

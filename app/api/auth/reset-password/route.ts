@@ -19,6 +19,20 @@ export async function POST(request: NextRequest) {
 		}
 
 		const db = getDb()
+		const tokenHash = hashPasswordResetToken(token)
+		const tokenRows = await db
+			.select({ id: passwordResetTokens.id })
+			.from(passwordResetTokens)
+			.where(
+				and(
+					eq(passwordResetTokens.tokenHash, tokenHash),
+					gt(passwordResetTokens.expiresAt, new Date()),
+					isNull(passwordResetTokens.usedAt),
+				),
+			)
+			.limit(1)
+		if (!tokenRows[0]) return NextResponse.json({ message: '重置链接已失效' }, { status: 400 })
+
 		const passwordHash = await bcrypt.hash(password, 12)
 
 		// 事务，防止并发请求
@@ -32,7 +46,7 @@ export async function POST(request: NextRequest) {
 					.from(passwordResetTokens)
 					.where(
 						and(
-							eq(passwordResetTokens.tokenHash, hashPasswordResetToken(token)),
+							eq(passwordResetTokens.tokenHash, tokenHash),
 							gt(passwordResetTokens.expiresAt, now),
 							isNull(passwordResetTokens.usedAt),
 						),

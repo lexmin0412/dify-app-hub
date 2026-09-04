@@ -21,6 +21,8 @@ function ResetPasswordContent() {
 			if (!response.ok) return message.error(data.message || '密码重置失败')
 			message.success('密码重置成功，请重新登录')
 			router.replace('/login')
+		} catch {
+			message.error('密码重置失败，请稍后重试')
 		} finally {
 			setLoading(false)
 		}
