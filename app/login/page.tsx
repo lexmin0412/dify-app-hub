@@ -103,6 +103,9 @@ export default function LoginPage() {
 							登录
 						</Button>
 					</Form.Item>
+					<div className="mb-2 text-right">
+						<a href="/forgot-password">忘记密码？</a>
+					</div>
 				</Form>
 			</Card>
 		</div>
