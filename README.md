@@ -50,9 +50,7 @@ docker compose up -d
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
-[![All Contributors](https://img.shields.io/badge/all_contributors-9-orange.svg?style=flat-square)](#contributors-)
-
+[![All Contributors](https://img.shields.io/badge/all_contributors-10-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
@@ -72,6 +70,7 @@ docker compose up -d
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/SickoGt"><img src="https://avatars.githubusercontent.com/u/17882380?v=4?s=100" width="100px;" alt="Sicko"/><br /><sub><b>Sicko</b></sub></a><br /><a href="https://github.com/lexmin0412/dify-app-hub/commits?author=SickoGt" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/HZJprince"><img src="https://avatars.githubusercontent.com/u/8064272?v=4?s=100" width="100px;" alt="HZJprince"/><br /><sub><b>HZJprince</b></sub></a><br /><a href="https://github.com/lexmin0412/dify-app-hub/issues?q=author%3AHZJprince" title="Bug reports">🐛</a> <a href="#design-HZJprince" title="Design">🎨</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/potofo"><img src="https://avatars.githubusercontent.com/u/138992835?v=4?s=100" width="100px;" alt="potofo"/><br /><sub><b>potofo</b></sub></a><br /><a href="https://github.com/lexmin0412/dify-app-hub/commits?author=potofo" title="Code">💻</a></td>
     </tr>
   </tbody>
   <tfoot>
