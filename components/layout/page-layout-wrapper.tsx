@@ -31,10 +31,11 @@ const ThemeContextWrapper = ({ children }: { children: React.ReactNode }) => {
 export default function PageLayoutWrapper({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname()
 	const isLoginPage = pathname === '/login'
+	const isPasswordResetPage = pathname === '/forgot-password' || pathname === '/reset-password'
 	const isInitPage = pathname?.startsWith('/init')
 	const isUserRoute =
 		pathname?.startsWith('/chat') || pathname?.startsWith('/apps') || pathname?.startsWith('/auth')
-	const isPublicPage = isLoginPage || isInitPage || isUserRoute
+	const isPublicPage = isLoginPage || isPasswordResetPage || isInitPage || isUserRoute
 
 	return (
 		<ThemeContextProvider>

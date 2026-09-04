@@ -1,4 +1,4 @@
-import { mysqlTable, varchar, datetime, uniqueIndex } from 'drizzle-orm/mysql-core'
+import { mysqlTable, varchar, datetime, uniqueIndex, int } from 'drizzle-orm/mysql-core'
 import { sql } from 'drizzle-orm'
 import { generateUuidV4 } from '@/lib/helpers'
 
@@ -11,6 +11,7 @@ export const users = mysqlTable(
 		name: varchar({ length: 255 }),
 		email: varchar({ length: 255 }).notNull(),
 		password: varchar({ length: 255 }).notNull(),
+		sessionVersion: int('session_version').default(0).notNull(),
 		createdAt: datetime('created_at', { fsp: 3 })
 			.default(sql`CURRENT_TIMESTAMP(3)`)
 			.notNull(),

@@ -40,6 +40,7 @@ export const authOptions = {
 					id: user.id,
 					email: user.email,
 					name: user.name,
+					sessionVersion: user.sessionVersion,
 				}
 			},
 		}),
@@ -55,6 +56,21 @@ export const authOptions = {
 		async jwt({ token, user }: any) {
 			if (user) {
 				token.id = user.id
+				token.sessionVersion = user.sessionVersion
+				return token
+			}
+
+			if (token.id) {
+				const db = getDb()
+				const rows = await db
+					.select({ sessionVersion: users.sessionVersion })
+					.from(users)
+					.where(eq(users.id, token.id))
+					.limit(1)
+
+				if (!rows[0] || rows[0].sessionVersion !== token.sessionVersion) {
+					return null
+				}
 			}
 			return token
 		},
